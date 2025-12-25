@@ -1,0 +1,645 @@
+/* ======================================================
+   THEME VARIABLES
+====================================================== */
+:root {
+  --accent: rgba(184, 147, 252, 0.8);
+
+  /* Dark */
+  --bg-dark: #120d1a;
+  --card-dark: rgba(27, 20, 38, 0.75);
+  --border-dark: rgba(255, 255, 255, 0.08);
+  --text-dark: #eee;
+
+  /* Light */
+  --bg-light: #faf7fc;
+  --card-light: rgba(255, 255, 255, 0.75);
+  --border-light: rgba(0, 0, 0, 0.08);
+  --text-light: #222;
+
+  /* Effects */
+  --blur: blur(14px);
+  --radius: 14px;
+}
+
+
+/* ======================================================
+   RESET & BASE
+====================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Inter, system-ui, sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-dark);
+  transition: background .3s ease, color .3s ease;
+}
+
+body[data-theme="light"] {
+  background: var(--bg-light);
+  color: var(--text-light);
+}
+
+
+/* ======================================================
+   HEADER
+====================================================== */
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: auto;
+  padding: 8px 16px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  backdrop-filter: var(--blur);
+  background: rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid var(--border-dark);
+  z-index: 50;
+}
+
+body[data-theme="light"] .header {
+  background: rgba(255, 255, 255, 0.65);
+  border-bottom: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ======================================================
+   TABS
+====================================================== */
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tabs button {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  font-size: 16px;
+  color: inherit;
+  opacity: 0.6;
+  transition: opacity .2s ease, color .2s ease;
+}
+
+.tabs button svg {
+  width: 30px;
+  height: 30px;
+  fill: currentColor;
+  opacity: 0.6;
+}
+
+.tabs button:hover,
+.tabs button.active {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.tabs button.active svg {
+  opacity: 1;
+}
+
+
+/* ======================================================
+   ACTIONS
+====================================================== */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.actions button {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--accent);
+  border: none;
+  color: #fff;
+
+  font-size: 24px;
+  cursor: pointer;
+  transition: opacity .2s ease;
+}
+
+.actions button:hover {
+  opacity: 0.85;
+}
+
+
+/* ======================================================
+   THEME TOGGLE
+====================================================== */
+.theme-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+
+  display: grid;
+  place-items: center;
+
+  background: transparent;
+  border: 1px solid var(--border-dark);
+  cursor: pointer;
+}
+
+.theme-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* Icon switching */
+body[data-theme="dark"] .icon-sun {
+  display: none;
+}
+
+body[data-theme="light"] .icon-moon {
+  display: none;
+}
+
+body[data-theme="light"] .theme-btn {
+  border: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ======================================================
+   SEARCH
+====================================================== */
+.search {
+  padding: 4px 16px;
+}
+
+.search input {
+  width: 100%;
+  padding: 12px 18px;
+
+  border-radius: var(--radius);
+  background: var(--card-dark);
+  backdrop-filter: var(--blur);
+  border: 1px solid var(--border-dark);
+
+  color: inherit;
+  outline: none;
+}
+
+body[data-theme="light"] .search input {
+  background: var(--card-light);
+  border: none;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ======================================================
+   LIST & ITEMS
+====================================================== */
+ul.list {
+  list-style: none;
+  padding: 16px;
+}
+
+li.item {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+
+  padding: 14px;
+  margin-bottom: 12px;
+
+  background: var(--card-dark);
+  backdrop-filter: var(--blur);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-dark);
+
+  cursor: grab;
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+li.item.dragging {
+  opacity: 0.5;
+  transform: scale(0.97);
+}
+
+body[data-theme="light"] li.item {
+  background: var(--card-light);
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* ======================================================
+   EMPTY STATE
+====================================================== */
+.empty {
+  margin-top: 60px;
+  text-align: center;
+  opacity: 0.5;
+  place-self: center;
+}
+
+
+/* ======================================================
+   MODALS
+====================================================== */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-box {
+  width: 90%;
+  max-width: 600px;
+  padding: 10px;
+
+  background: var(--card-dark);
+  backdrop-filter: var(--blur);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-dark);
+}
+
+body[data-theme="light"] .modal-box {
+  background: var(--card-light);
+  border: none;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.modal-box input,
+.modal-box textarea,
+.modal-actions button {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+
+  border-radius: 10px;
+  border: none;
+  outline: none;
+
+  background: #2a203a;
+  color: #fff;
+}
+
+body[data-theme="light"] .modal-box input,
+body[data-theme="light"] .modal-box textarea {
+  background: #f0f0f0;
+  color: #222;
+}
+
+.modal-box textarea {
+  min-height: 300px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+
+/* ======================================================
+   NOTE LAYOUTS
+====================================================== */
+ul.list.list li.item {
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 16px;
+}
+
+ul.list.list li.item>div:nth-of-type(1) {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+  align-items: baseline;
+}
+
+ul.list.list li.item>div:nth-of-type(1) strong {
+  font-size: 16px;
+  grid-row: 1;
+}
+
+ul.list.list li.item>div:nth-of-type(1) small {
+  font-size: 12px;
+  opacity: .8;
+  grid-row: 2;
+}
+
+ul.list.list li.item>div:nth-of-type(1) p {
+  display: none;
+}
+
+ul.list.card li.item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+}
+
+ul.list.card li.item>div:nth-of-type(1) {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 8px;
+}
+
+ul.list.card li.item>div:nth-of-type(1) strong {
+  font-size: 20px;
+  grid-row: 2;
+}
+
+ul.list.card li.item>div:nth-of-type(1) small {
+  font-size: 11px;
+  opacity: .8;
+  grid-row: 1;
+}
+
+ul.list.card li.item>div:nth-of-type(1) p {
+  font-size: 16px;
+  width: 100%;
+  grid-row: 3;
+  overflow: hidden;
+  text-wrap-mode: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+#list.grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+
+#list.grid li.item {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  height: 280px;
+  gap: 8px;
+}
+
+ul.list.grid li.item > div:nth-of-type(1) {
+  height: 100%;
+  display: grid;
+  gap: 8px;
+  grid-template-rows: auto 1fr auto;
+  min-height: 0; /* REQUIRED for overflow to work */
+}
+
+
+ul.list.grid li.item>div:nth-of-type(1) strong {
+  font-size: 20px;
+  grid-row: 1;
+}
+
+ul.list.grid li.item>div:nth-of-type(1) small {
+  font-size: 11px;
+  opacity: .8;
+  grid-row: 3;
+}
+
+ul.list.grid li.item > div:nth-of-type(1) p {
+  grid-row: 2;
+
+  /* Fill vertical space */
+  min-height: 0;
+
+  /* Normal wrapping */
+  white-space: normal;
+  word-break: break-word;
+
+  /* Multi-line ellipsis */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7; /* tune based on height */
+
+  overflow: hidden;
+}
+
+
+
+
+/* ======================================================
+   TODO LIST
+====================================================== */
+.todo-list {
+  display: flex;
+  align-content: baseline;
+  flex-direction: column;
+}
+
+
+/* ======================================================
+   ICON SELECT
+====================================================== */
+.icon-select {
+  position: relative;
+}
+
+.icon-trigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  display: grid;
+  place-items: center;
+}
+
+.icon-trigger svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.icon-options {
+  position: absolute;
+  top: 130%;
+  right: 0;
+
+  min-width: 160px;
+  padding: 6px;
+
+  background: var(--card-dark);
+  backdrop-filter: var(--blur);
+  border-radius: 12px;
+  border: 1px solid var(--border-dark);
+
+  display: none;
+  z-index: 20;
+
+  list-style: none;
+}
+
+.icon-select.open .icon-options {
+  display: block;
+}
+
+.icon-options li {
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.icon-options li::before {
+  content: "✓";
+  opacity: 0;
+  margin-right: 6px;
+}
+
+.icon-options li.selected::before {
+  opacity: 1;
+}
+
+body[data-theme="light"] .icon-options {
+  background: var(--card-light);
+  border: none;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* ======================================================
+   TODO GROUPS
+====================================================== */
+.todo-groups {
+  padding: 16px;
+}
+
+.todo-groups details {
+  margin-bottom: 4px;
+  transition: 300ms all ease;
+}
+
+.todo-groups summary {
+  cursor: pointer;
+  font-weight: 600;
+  user-select: none;
+  padding: 10px;
+  border-bottom: 1.5px solid var(--border-dark);
+  opacity: 0.85;
+}
+
+.todo-left input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+  place-self: center;
+  align-self: center;
+  justify-self: center;
+  cursor: pointer;
+}
+
+.todo-list.completed li.item {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+#list.item.dragging {
+  opacity: 0.4;
+  cursor: grabbing;
+}
+
+/* ICON ACTION BUTTONS */
+/* ======================================================
+   ICON ACTION BUTTONS (SMOOTH & PROFESSIONAL)
+====================================================== */
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+
+  display: grid;
+  place-items: center;
+
+  background: transparent;
+  border: 1px solid var(--border-dark);
+  color: inherit;
+
+  cursor: pointer;
+
+  /* Smooth reveal */
+  opacity: 0;
+  transform: translateY(4px) scale(0.95);
+  pointer-events: none;
+
+  transition:
+    opacity .25s ease,
+    transform .25s ease,
+    background .2s ease,
+    color .2s ease;
+}
+
+/* Show on hover */
+li.item:hover .icon-btn,
+li.item:focus-within .icon-btn {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.icon-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Hover & active */
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.icon-btn:active {
+  transform: scale(0.92);
+}
+
+/* Accent behaviors */
+.icon-btn.edit:hover {
+  color: var(--accent);
+}
+
+.icon-btn.delete:hover {
+  color: #ff6b6b;
+}
+
+/* Light theme */
+body[data-theme="light"] .icon-btn {
+  border: 1px solid var(--border-light);
+}
+
+body[data-theme="light"] .icon-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* Compact inside items */
+.item .icon-btn {
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+}
+
+/* Mobile: always visible */
+@media (max-width: 600px) {
+  .icon-btn {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+}
