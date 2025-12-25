@@ -15,6 +15,9 @@ Built with **vanilla HTML, CSS, and JavaScript** — no frameworks, no dependenc
 * Multi-line text handling with clean truncation in card view
 
 
+## Live site: http://note-todo-rho.vercel.app/
+
+
 ### ✅ Todos
 * Separate **Pending** and **Completed** sections
 * Checkbox to mark todos as completed
@@ -64,3 +67,4 @@ This project is open-source and available under the **MIT License**.
 ## Screenshots
 ![Note App Screenshot 1](https://github.com/DantelCode/note-todo/blob/main/screenshots/1.png)
 ![Note App Screenshot 2](https://github.com/DantelCode/note-todo/blob/main/screenshots/2.png)
+
